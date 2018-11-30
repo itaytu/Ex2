@@ -6,6 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class turns a CSV file into an ArrayList containing Arrays of Strings 
+ * and another Array of Strings for the type of elements, for example -> name, TimeSeen, SSID, ID etc.
+ * 
+ * @author Itay Tuson and Sagi Oshri
+ *
+ */
 public class CSVreader {
 
 	//private ArrayList<GIS_Object> myUsers;
@@ -14,6 +21,12 @@ public class CSVreader {
 	//TODO:
 	//private int width, length, rowIndex;
 
+	/**
+	 * This functions gets a CSV file and converts the information in it into an ArrayList.
+	 * 
+	 * @param file file
+	 * @return ArrayList containing Arrays of Strings
+	 */
 	public static ArrayList<String[]> reader(File file) {
 		File newFile = new File(file.toString());
 		String line = "";
@@ -35,7 +48,12 @@ public class CSVreader {
 		return myData;
 	}
 
-
+	/**
+	 * This function gets the CSV file String address and converts the information in it into an ArrayList.
+	 * 
+	 * @param String fileName
+	 * @return ArrayList containing Arrays of Strings
+	 */
 	public static ArrayList<String[]> reader(String fileName) {
 		
 		File file = new File(fileName);
@@ -46,7 +64,6 @@ public class CSVreader {
 			br.readLine();
 			String element = br.readLine();
 			Elements= element.split(",");
-			//System.out.println(Elements.toString());
 			while((line = br.readLine() )!= null) {
 				String [] lineDataDetails = line.split(",");
 				myData.add(lineDataDetails);
@@ -58,27 +75,19 @@ public class CSVreader {
 		return myData;
 	}
 
-
+	/**
+	 * @return String[] type of elements associated with the file.
+	 */
 	public String[] getElements() {
 		return Elements;
 	}
 	
 	
-		
+	/**	
+	 * @return ArrayList containing the data of the CSV file.
+	 */
 	public ArrayList<String[]> getMyData() {
 		return myData;
 	}
-
-
-
-	/*	public static void main(String[] args) {
-
-		String csvFile = "C:/Users/Itayt/eclipse-workspace/Ex2/OOP_EX2-EX4/OOP_EX2-Ex4/src/WigleWifi_20171201110209.csv";
-		reader(csvFile);
-		for (int i = 0; i < myData.size(); i++) {
-			System.out.println(Arrays.toString(myData.get(i)));
-		}
-	}*/
-
 
 }

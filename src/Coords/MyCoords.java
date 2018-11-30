@@ -2,10 +2,20 @@ package Coords;
 
 import Geom.Point3D;
 
+/**
+ * This class represents an implementation of the coords_converter interface.
+ * This class has simple functions to calculate various things.
+ * 
+ * Some of the functions included are: add, distance3D, vector3D, isValid_GPS_point etc.
+ * 
+ * @author Itay Tuson and Sagi Oshri
+ *
+ */
 public class MyCoords implements coords_converter {
 	
 	final double earthR = 6371000;
 	
+	/** computes a new point which is the gps point transformed by a 3D vector (in meters)*/
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
 		double lonNorm = getLon(gps);
@@ -13,10 +23,11 @@ public class MyCoords implements coords_converter {
 		double p1_y = gps.y() + (180/Math.PI)*(Math.asin(local_vector_in_meter.y()/(earthR*lonNorm)));
 		double p1_z = gps.z() + local_vector_in_meter.z();
 		Point3D newPoint = new Point3D(p1_x, p1_y, p1_z);
+		
 		return newPoint;	
 	}
-
 	
+	/** computes the 3D distance (in meters) between the two gps like points */
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
 		double lonNorm = getLon(gps0);
@@ -27,9 +38,10 @@ public class MyCoords implements coords_converter {
 		return distance;
 	}
 
-	
+	/** computes the 3D vector (in meters) between two gps like points  */
 	@Override
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {
+		
 		double lonNorm = getLon(gps0);
 		double vec_X = Math.sin((gps1.x()-gps0.x())*(Math.PI/180))*earthR;
 		double vec_Y = Math.sin((gps1.y()-gps0.y())*(Math.PI/180))*earthR*lonNorm;
@@ -38,7 +50,9 @@ public class MyCoords implements coords_converter {
 		return newVector;
 	}
 
-	
+	/** computes the polar representation of the 3D vector be gps0-->gps1 
+	 *  Note: this method should return an azimuth (aka yaw), elevation (pitch), and distance
+	 */
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
 		double longps0 = Math.toRadians(gps0.y()); 
@@ -60,6 +74,11 @@ public class MyCoords implements coords_converter {
 		return arr;
 	}
 
+	/**
+	 * return true iff this point is a valid lat, lon , lat coordinate: [-180,+180],[-90,+90],[-450, +inf]
+	 * @param p
+	 * @return boolean true or false.
+	 */
 	@Override
 	public boolean isValid_GPS_Point(Point3D p) {
 		return ((-180<=p.x() && p.x()<=180) &&
@@ -67,6 +86,7 @@ public class MyCoords implements coords_converter {
 				(-450<=p.z() && p.z()<=9000));
 	}
 	
+	/** return the LonNorm calculated for a given point. */
 	private double getLon(Point3D point) {
 		return Math.cos(point.x()*(Math.PI/180));
 	}

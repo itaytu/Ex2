@@ -7,23 +7,23 @@ import org.junit.jupiter.api.Test;
 
 import Coords.MyCoords;
 import Geom.Point3D;
-	/**
-	 * This class represents a simple JUnit test for MyCoords. the tests included are:
-	 * Add
-	 * Distance3D 
-	 * Vector3D	
-	 * Azimuth_elevation_dist
-	 * IsValid_GPS_Point
-	 * 
-	 * @author Itayt
-	 *
-	 */
+/**
+ * This class represents a simple JUnit test for MyCoords. the tests included are:
+ * Add
+ * Distance3D 
+ * Vector3D	
+ * Azimuth_elevation_dist
+ * IsValid_GPS_Point
+ * 
+ * @author Itayt and Sagi Oshri
+ *
+ */
 class MyCoordsTest {
-	
+
 	Point3D p1, p2, v;
 	MyCoords mc = new MyCoords();
 	double eps=0.001;
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		p1 = new Point3D(32.103315, 35.209039, 670);
@@ -33,11 +33,11 @@ class MyCoordsTest {
 
 	@Test
 	void testAdd() {
-		Point3D pTemp;
-		pTemp = mc.add(p1, v);
-		assertEquals(p2.x(), pTemp.x(),eps,"The Point Latitude is wrong");
-		assertEquals(p2.y(), pTemp.y(),eps,"The Point longtidude is wrong");
-		assertEquals(p2.z(), pTemp.z(),eps,"The Point atitude is wrong");
+		Point3D actual;
+		actual = mc.add(p1, v);
+		assertEquals(p2.x(), actual.x(),eps,"The Point Latitude is wrong");
+		assertEquals(p2.y(), actual.y(),eps,"The Point longtidude is wrong");
+		assertEquals(p2.z(), actual.z(),eps,"The Point atitude is wrong");
 	}
 
 	@Test
@@ -49,11 +49,11 @@ class MyCoordsTest {
 
 	@Test
 	void testVector3D() {
-		Point3D pTemp;
-		pTemp = mc.vector3D(p1, p2);
-		assertEquals(v.x(), pTemp.x(),eps,"The Vector Latitude is wrong");
-		assertEquals(v.y(), pTemp.y(),eps,"The Vector longtidude is wrong");
-		assertEquals(v.z(), pTemp.z(),eps,"The Vector atitude is wrong");	
+		Point3D actual;
+		actual = mc.vector3D(p1, p2);
+		assertEquals(v.x(), actual.x(),eps,"The Vector Latitude is wrong");
+		assertEquals(v.y(), actual.y(),eps,"The Vector longtidude is wrong");
+		assertEquals(v.z(), actual.z(),eps,"The Vector atitude is wrong");	
 	}
 
 	@Test
