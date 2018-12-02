@@ -78,7 +78,7 @@ public class CSVreader {
 	/**
 	 * @return String[] type of elements associated with the file.
 	 */
-	public String[] getElements() {
+	public static String[] getElements() {
 		return Elements;
 	}
 	
@@ -86,7 +86,7 @@ public class CSVreader {
 	/**	
 	 * @return ArrayList containing the data of the CSV file.
 	 */
-	public ArrayList<String[]> getMyData() {
+	public static ArrayList<String[]> getMyData() {
 		return myData;
 	}
 

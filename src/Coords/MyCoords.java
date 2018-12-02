@@ -18,18 +18,25 @@ public class MyCoords implements coords_converter {
 	/** computes a new point which is the gps point transformed by a 3D vector (in meters)*/
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
+		if(!isValid_GPS_Point(gps)) return null;
 		double lonNorm = getLon(gps);
 		double p1_x = gps.x() + (180/Math.PI)*(Math.asin(local_vector_in_meter.x()/earthR));
 		double p1_y = gps.y() + (180/Math.PI)*(Math.asin(local_vector_in_meter.y()/(earthR*lonNorm)));
 		double p1_z = gps.z() + local_vector_in_meter.z();
 		Point3D newPoint = new Point3D(p1_x, p1_y, p1_z);
 		
+		if(p1_x<-180||180<p1_x) {
+			newPoint.set_x(((p1_x+180)%360) -180);
+		}
+		if(!isValid_GPS_Point(newPoint)) return null;
 		return newPoint;	
 	}
 	
 	/** computes the 3D distance (in meters) between the two gps like points */
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
+		if(!(isValid_GPS_Point(gps0))||!(isValid_GPS_Point(gps1))) return Double.MAX_VALUE;
+		
 		double lonNorm = getLon(gps0);
 		double Dis_x = Math.sin((gps1.x()-gps0.x())*(Math.PI/180))*earthR;
 		double Dis_y = Math.sin((gps1.y()-gps0.y())*(Math.PI/180))*lonNorm*earthR;
@@ -41,6 +48,7 @@ public class MyCoords implements coords_converter {
 	/** computes the 3D vector (in meters) between two gps like points  */
 	@Override
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {
+		if(!(isValid_GPS_Point(gps0))||!(isValid_GPS_Point(gps1))) return null;
 		
 		double lonNorm = getLon(gps0);
 		double vec_X = Math.sin((gps1.x()-gps0.x())*(Math.PI/180))*earthR;
@@ -55,6 +63,8 @@ public class MyCoords implements coords_converter {
 	 */
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
+		if(!(isValid_GPS_Point(gps0))||!(isValid_GPS_Point(gps1))) return null;
+		
 		double longps0 = Math.toRadians(gps0.y()); 
 		double longps1 = Math.toRadians(gps1.y()); 
 		double latgps0 = Math.toRadians(gps0.x()); 
