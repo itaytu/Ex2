@@ -1,7 +1,7 @@
 # Ex2-Ex4
 OOP project for Geometric and Geographic points 
 
-In this project we implemented a simple method to turn CSV files into Objects in java, containing Geometric, Giographic and other data 
+In this project we implemented a simple method to turn CSV files into Objects in java, containing Geometric, Geographic and other data 
 (such as: Name, LastSeen, Type etc.). After turning the files into objects we used a method to turn those objects into KML files.
 
 # Project Hierarchy
@@ -29,3 +29,19 @@ Short explanation on how to use the project:
       3. Create a new GIS_project and scan the folder by using the MultiCSV.parseForCsvFiles.
       4. Use the function MultiCSV.ProjectToKML to take the project and create a new KML file with the output path.
  
+ # Short explanation about the packages
+   Algorithms - Contains all the classes needed to implement the interfaces in order to create GIS elements, layers and projects.
+                This package also contains the class needed to scan for few CSV files and creating a KML file from it.
+    
+   Coords - Contains the classes needed to calculate relevant geographic and geometric information.
+            Such as: Distance3D, Distance2D, Add between 2 Points etc.
+
+   File_format - Contains relevent classes in order to read a CSV file and create a KML file.
+   
+   Geom - Contains the classes representing the Geometric data of an element.
+   
+   GIS - Contains the classes representing the metadata, element, layer, project interfaces.
+   
+   Tests - Contains the Junit classes for testing.
+   
+   
