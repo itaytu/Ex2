@@ -17,12 +17,12 @@ The Hierarchy of this project is as follows:
 
 # How to use project
 Short explanation on how to use the project:
-  A) If only one CSV file is wanted use the following steps:
+  1. If only one CSV file is wanted use the following steps:
       1. open the mainTest class and create a String for the CSVfile directory path (for example: "C:/Folder_name/File_name.csv").
       2. Create a String for the new KML file output path as desired (for example: "C:/Desired_folder_name/new_file_name.kml").
       3. Use the function Csv2Kml.writeFileKML(CSVfile String, KMLfile String).
     
-  B) If a few CSV files are desired use the Following steps:
+  2. If a few CSV files are desired use the Following steps:
       1. open the mainTest class and create a String for the folder directory path containing the CSV files 
          (for example: "C:/Folder_name").
       2. Create a String for the KML file output path as desired (for example: "C:/Desired_folder_name/new_file_name.kml").
