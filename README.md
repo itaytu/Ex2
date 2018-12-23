@@ -1,4 +1,4 @@
-# Ex2-Ex4
+# Ex2
 OOP project for Geometric and Geographic points 
 
 In this project we implemented a simple method to turn CSV files into Objects in java, containing Geometric, Geographic and other data 
